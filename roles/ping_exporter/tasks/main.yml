@@ -1,0 +1,15 @@
+---
+- name: Copy config
+  copy:
+    src: config.yml
+    dest: "{{ ping_exporter_config_path }}"
+
+- name: Create container
+  community.general.docker_container:
+    name: ping-exporter
+    image: czerwonk/ping_exporter
+    container_default_behavior: compatibility
+    volumes:
+      - "{{ ping_exporter_config_path }}:/config"
+    published_ports:
+      - 9427:9427
