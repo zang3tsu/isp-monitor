@@ -3,7 +3,7 @@ prometheus_version: latest
 prometheus_config_dir: "{{ base_path }}/prometheus/config"
 prometheus_db_dir: "{{ base_path }}/prometheus/db"
 prometheus_storage_retention: "365d"
-prometheus_web_listen_address: "0.0.0.0:9091"
+prometheus_web_listen_address: "{{ prometheus_web_listen_address }}"
 prometheus_web_external_url: "http://{{ ansible_host }}:9091"
 prometheus_targets:
   node:

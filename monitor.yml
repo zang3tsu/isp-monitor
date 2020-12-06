@@ -1,6 +1,7 @@
 ---
 - hosts: router
   roles:
-#    - docker
-#    - ping_exporter
+    - docker
+    - ping_exporter
     - prometheus
+    - grafana

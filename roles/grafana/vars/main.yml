@@ -1,0 +1,16 @@
+---
+grafana_logs_dir: "{{ base_path }}/grafana/logs"
+grafana_data_dir: "{{ base_path }}/grafana/data"
+grafana_security:
+  admin_user: admin
+  admin_password: "{{ grafana_admin_password }}"
+grafana_datasources:
+  - name: prometheus
+    type: prometheus
+    access: proxy
+    url: 'http://{{ prometheus_web_listen_address }}'
+    basicAuth: false
+grafana_dashboards:
+  - dashboard_id: 3662
+    revision_id: 1
+    datasource: prometheus

@@ -1,0 +1,4 @@
+---
+- name: Run cloudalchemy.grafana role
+  import_role:
+    name: cloudalchemy.grafana
