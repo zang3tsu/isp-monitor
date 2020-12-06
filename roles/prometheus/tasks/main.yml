@@ -1,0 +1,4 @@
+---
+- name: Run cloudalchemy.prometheus role
+  import_role:
+    name: cloudalchemy.prometheus

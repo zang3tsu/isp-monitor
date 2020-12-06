@@ -1,2 +1,2 @@
 ---
-ping_exporter_config_path: /ping_exporter/config/
+ping_exporter_config_path: "{{ base_path }}/ping_exporter/config/"

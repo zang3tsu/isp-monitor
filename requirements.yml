@@ -1,3 +1,4 @@
 ---
 collections:
+  - cloudalchemy.prometheus
   - community.general
