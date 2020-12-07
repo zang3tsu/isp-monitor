@@ -8,9 +8,5 @@ grafana_datasources:
   - name: prometheus
     type: prometheus
     access: proxy
-    url: 'http://{{ prometheus_web_listen_address }}'
+    url: 'http://{{ prometheus_grafana_web_listen_address }}'
     basicAuth: false
-grafana_dashboards:
-  - dashboard_id: 3662
-    revision_id: 1
-    datasource: prometheus

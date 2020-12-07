@@ -1,0 +1,8 @@
+---
+- name: Create network/s
+  community.general.docker_network:
+    name: macvlan-net
+    driver: macvlan
+    driver_options:
+      parent: "{{ docker_parent_interface }}"
+    ipam_config: "{{ docker_ipam_config  }}"

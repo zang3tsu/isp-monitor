@@ -3,7 +3,7 @@ prometheus_version: latest
 prometheus_config_dir: "{{ base_path }}/prometheus/config"
 prometheus_db_dir: "{{ base_path }}/prometheus/db"
 prometheus_storage_retention: "365d"
-prometheus_web_listen_address: "{{ prometheus_web_listen_address }}"
+prometheus_web_listen_address: "{{ prometheus_grafana_web_listen_address }}"
 prometheus_web_external_url: "http://{{ ansible_host }}:9091"
 prometheus_targets:
   node:
@@ -12,6 +12,18 @@ prometheus_targets:
         - "localhost:9427" # ping_exporter
       labels:
         env: router
+    - targets:
+        - "192.168.10.200:9427"
+      labels:
+        env: pldt
+    - targets:
+        - "192.168.11.200:9427"
+      labels:
+        env: globe
+    - targets:
+        - "192.168.12.200:9427"
+      labels:
+        env: smart
 prometheus_scrape_jobs:
   - job_name: prometheus
     metrics_path: /metrics
@@ -23,3 +35,6 @@ prometheus_scrape_jobs:
     static_configs:
       - targets:
           - "localhost:9427"
+          - "192.168.10.200:9427"
+          - "192.168.11.200:9427"
+          - "192.168.12.200:9427"

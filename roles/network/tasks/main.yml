@@ -1,0 +1,19 @@
+---
+- name: Create ip aliases
+  template:
+    src: network.j2
+    dest: /etc/network/interfaces.d/{{ item.key }}-net
+    owner: root
+    group: root
+    mode: '0644'
+  loop: "{{ isps | dict2items }}"
+
+- name: Make sure to source interfaces.d
+  lineinfile:
+    path: /etc/network/interfaces
+    line: source /etc/network/interfaces.d/*
+
+- name: Restart network
+  service:
+    name: networking
+    state: restarted

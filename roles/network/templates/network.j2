@@ -1,0 +1,5 @@
+# {{ item.key|upper }}
+iface {{ parent_interface }} inet static
+    address {{ item.value }}.4/24
+    up route add -net {{ item.value }}.0 netmask 255.255.255.0 gw {{ item.value }}.1
+    down route del -net {{ item.value }}.0 netmask 255.255.255.0 gw {{ item.value }}.1

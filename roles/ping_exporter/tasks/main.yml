@@ -4,12 +4,33 @@
     src: config.yml
     dest: "{{ ping_exporter_config_path }}"
 
-- name: Create container
+- name: Create base container
   community.general.docker_container:
     name: ping-exporter
     image: czerwonk/ping_exporter
     container_default_behavior: compatibility
+    restart_policy: unless-stopped
     volumes:
       - "{{ ping_exporter_config_path }}:/config"
     published_ports:
       - 9427:9427
+
+- name: Create isp container/s
+  community.general.docker_container:
+    name: "ping-exporter-{{ item.key }}"
+    image: czerwonk/ping_exporter
+    container_default_behavior: compatibility
+    restart_policy: unless-stopped
+    networks_cli_compatible: yes
+    purge_networks: yes
+    network_mode: macvlan-net
+    networks:
+      - name: macvlan-net
+        ipv4_address: "{{ item.value }}.200"
+        links:
+          - "ping-exporter-{{ item.key }}"
+    volumes:
+      - "{{ ping_exporter_config_path }}:/config"
+    published_ports:
+      - 9427:9427
+  loop: "{{ isps | dict2items }}"
