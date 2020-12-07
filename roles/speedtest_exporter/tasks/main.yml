@@ -1,0 +1,35 @@
+---
+# source: https://github.com/billimek/prometheus-speedtest-exporter
+- name: Create base container
+  community.general.docker_container:
+    name: speedtest-exporter
+    image: billimek/prometheus-speedtest-exporter:1.1.0
+    container_default_behavior: compatibility
+    restart_policy: unless-stopped
+    published_ports:
+      - 9469:9469
+    dns_servers:
+      - 8.8.4.4
+      - 8.8.8.8
+
+- name: Create isp container/s
+  community.general.docker_container:
+    name: "speedtest-exporter-{{ item.key }}"
+    image: billimek/prometheus-speedtest-exporter:1.1.0
+    container_default_behavior: compatibility
+    restart_policy: unless-stopped
+    published_ports:
+      - 9469:9469
+    dns_servers:
+      - 8.8.4.4
+      - 8.8.8.8
+    networks_cli_compatible: yes
+    purge_networks: yes
+    network_mode: macvlan-net
+    networks:
+      - name: macvlan-net
+        ipv4_address: "{{ item.value }}.201"
+        links:
+          - "speedtest-exporter-{{ item.key }}"
+
+  loop: "{{ isps | dict2items }}"

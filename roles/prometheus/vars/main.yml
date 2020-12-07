@@ -5,32 +5,19 @@ prometheus_db_dir: "{{ base_path }}/prometheus/db"
 prometheus_storage_retention: "365d"
 prometheus_web_listen_address: "{{ prometheus_grafana_web_listen_address }}"
 prometheus_web_external_url: "http://{{ ansible_host }}:9091"
-prometheus_targets:
-  node:
-    - targets:
-        - "localhost:9091" # prometheus
-        - "localhost:9427" # ping_exporter
-      labels:
-        env: router
-    - targets:
-        - "192.168.10.200:9427"
-      labels:
-        env: pldt
-    - targets:
-        - "192.168.11.200:9427"
-      labels:
-        env: globe
-    - targets:
-        - "192.168.12.200:9427"
-      labels:
-        env: smart
-prometheus_scrape_jobs:
+
+prometheus_scrape_configs:
   - job_name: prometheus
     metrics_path: /metrics
     static_configs:
       - targets:
-          - "localhost:9091"
-  - job_name: 'ping_exporter'
+          - "192.168.250.2:9091"
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: env
+        replacement: _router
+
+  - job_name: "ping_exporter"
     metrics_path: /metrics
     static_configs:
       - targets:
@@ -38,3 +25,76 @@ prometheus_scrape_jobs:
           - "192.168.10.200:9427"
           - "192.168.11.200:9427"
           - "192.168.12.200:9427"
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: (localhost.*)
+        target_label: env
+        replacement: _router
+      - source_labels: [__address__]
+        regex: (192.168.10.*)
+        target_label: env
+        replacement: pldt
+      - source_labels: [__address__]
+        regex: (192.168.11.*)
+        target_label: env
+        replacement: globe
+      - source_labels: [__address__]
+        regex: (192.168.12.*)
+        target_label: env
+        replacement: smart
+
+  - job_name: "speedtest_exporter"
+    metrics_path: /probe
+    params:
+      script: [speedtest]
+    static_configs:
+      - targets:
+          - "localhost:9469"
+          - "192.168.10.201:9469"
+          - "192.168.11.201:9469"
+          - "192.168.12.201:9469"
+    scrape_interval: 15m
+    scrape_timeout: 90s
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: (localhost.*)
+        target_label: env
+        replacement: _router
+      - source_labels: [__address__]
+        regex: (192.168.10.*)
+        target_label: env
+        replacement: pldt
+      - source_labels: [__address__]
+        regex: (192.168.11.*)
+        target_label: env
+        replacement: globe
+      - source_labels: [__address__]
+        regex: (192.168.12.*)
+        target_label: env
+        replacement: smart
+
+  - job_name: "script_exporter"
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - "localhost:9469"
+          - "192.168.10.201:9469"
+          - "192.168.11.201:9469"
+          - "192.168.12.201:9469"
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: (localhost.*)
+        target_label: env
+        replacement: _router
+      - source_labels: [__address__]
+        regex: (192.168.10.*)
+        target_label: env
+        replacement: pldt
+      - source_labels: [__address__]
+        regex: (192.168.11.*)
+        target_label: env
+        replacement: globe
+      - source_labels: [__address__]
+        regex: (192.168.12.*)
+        target_label: env
+        replacement: smart

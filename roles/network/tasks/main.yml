@@ -5,7 +5,7 @@
     dest: /etc/network/interfaces.d/{{ item.key }}-net
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
   loop: "{{ isps | dict2items }}"
 
 - name: Make sure to source interfaces.d

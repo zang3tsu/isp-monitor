@@ -5,7 +5,7 @@ isps:
   globe: 192.168.11
   smart: 192.168.12
 
-prometheus_grafana_web_listen_address: "0.0.0.0:9091"
+prometheus_grafana_web_listen_address: "192.168.250.2:9091"
 
 docker_parent_interface: vmbr0
 docker_ipam_config:

@@ -1,4 +1,5 @@
 ---
+# Source: https://github.com/czerwonk/ping_exporter
 - name: Copy config
   copy:
     src: config.yml

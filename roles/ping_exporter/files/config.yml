@@ -14,7 +14,7 @@ targets:
 
 dns:
   refresh: 2m15s
-  nameserver: 1.1.1.1
+  nameserver: 8.8.4.4
 
 ping:
   interval: 2s

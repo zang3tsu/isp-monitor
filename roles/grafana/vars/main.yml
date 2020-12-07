@@ -8,5 +8,10 @@ grafana_datasources:
   - name: prometheus
     type: prometheus
     access: proxy
-    url: 'http://{{ prometheus_grafana_web_listen_address }}'
+    url: "http://{{ prometheus_grafana_web_listen_address }}"
     basicAuth: false
+grafana_auth:
+  anonymous:
+    enabled: true
+    org_name: Main Org.
+    org_role: Viewer

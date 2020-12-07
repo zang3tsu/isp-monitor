@@ -3,5 +3,6 @@
   roles:
     - docker
     - ping_exporter
+    - speedtest_exporter
     - prometheus
     - grafana
