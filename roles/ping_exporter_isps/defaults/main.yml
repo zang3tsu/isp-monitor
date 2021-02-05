@@ -1,0 +1,2 @@
+---
+ping_exporter_config_path: "{{ base_path }}/ping_exporter_isps/config/"

@@ -1,4 +1,7 @@
 ---
 collections:
-  - cloudalchemy.prometheus
   - community.general
+
+roles:
+  - src: cloudalchemy.grafana
+  - src: cloudalchemy.prometheus

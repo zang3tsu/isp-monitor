@@ -7,7 +7,7 @@
 
 - name: Create base container
   community.general.docker_container:
-    name: ping-exporter
+    name: ping-exporter-isps
     image: czerwonk/ping_exporter
     container_default_behavior: compatibility
     restart_policy: unless-stopped
@@ -18,7 +18,7 @@
 
 - name: Create isp container/s
   community.general.docker_container:
-    name: "ping-exporter-{{ item.key }}"
+    name: "ping-exporter-isps-{{ item.key }}"
     image: czerwonk/ping_exporter
     container_default_behavior: compatibility
     restart_policy: unless-stopped

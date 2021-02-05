@@ -22,14 +22,19 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
           - "localhost:9427"
+          - "localhost:9428"
           - "192.168.10.200:9427"
           - "192.168.11.200:9427"
           - "192.168.12.200:9427"
     relabel_configs:
       - source_labels: [__address__]
-        regex: (localhost.*)
+        regex: (localhost:9427)
         target_label: env
         replacement: _router
+      - source_labels: [__address__]
+        regex: (localhost:9428)
+        target_label: env
+        replacement: devices
       - source_labels: [__address__]
         regex: (192.168.10.*)
         target_label: env
