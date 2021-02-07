@@ -1,6 +1,6 @@
 ---
 # Source: https://github.com/czerwonk/ping_exporter
-- name: Copy config
+- name: Copy base config
   copy:
     src: config.yml
     dest: "{{ ping_exporter_config_path }}"
@@ -15,6 +15,12 @@
       - "{{ ping_exporter_config_path }}:/config"
     published_ports:
       - 9427:9427
+
+- name: Template isp config
+  template:
+    src: config.yml.j2
+    dest: "{{ ping_exporter_isps_config_path }}/config.yml"
+  loop: "{{ isps | dict2items }}"
 
 - name: Create isp container/s
   community.general.docker_container:
@@ -31,7 +37,7 @@
         links:
           - "ping-exporter-{{ item.key }}"
     volumes:
-      - "{{ ping_exporter_config_path }}:/config"
+      - "{{ ping_exporter_isps_config_path }}:/config"
     published_ports:
       - 9427:9427
   loop: "{{ isps | dict2items }}"
