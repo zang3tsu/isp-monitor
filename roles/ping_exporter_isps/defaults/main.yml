@@ -1,3 +1,2 @@
 ---
-ping_exporter_config_path: "{{ base_path }}/ping_exporter_isps/config/"
 ping_exporter_isps_config_path: "{{ base_path }}/ping_exporter_isps_{{ item.key }}/config/"

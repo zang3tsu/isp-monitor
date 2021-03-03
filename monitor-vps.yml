@@ -1,0 +1,7 @@
+---
+- hosts: vps
+  roles:
+    - docker_install
+    - docker_shorewall
+    - ping_exporter_tracker
+    - speedtest_exporter

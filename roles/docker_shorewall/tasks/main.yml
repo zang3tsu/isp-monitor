@@ -1,0 +1,52 @@
+---
+# NOTES
+
+# https://shorewall.org/Docker.html
+
+# https://gist.github.com/lukasnellen/20761a20286f32efc396e207d986295d
+
+- name: Override shorewall service
+  copy:
+    src: override.conf
+    dest: /etc/systemd/system/shorewall.service.d/
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: Enable docker support in shorewall
+  lineinfile:
+    path: /etc/shorewall/shorewall.conf
+    line: DOCKER=Yes
+    regexp: "^DOCKER="
+
+- name: Add docker to shorewall zones
+  lineinfile:
+    path: /etc/shorewall/zones
+    line: "dock    ipv4"
+
+- name: Allow docker to all zones
+  lineinfile:
+    path: /etc/shorewall/policy
+    line: "dock            all             ACCEPT"
+    insertbefore: "^# THE FOLLOWING POLICY MUST BE LAST"
+
+- name: Add main docker bridge to interfaces
+  lineinfile:
+    path: /etc/shorewall/interfaces
+    line: "dock    docker+         routeback=1"
+
+- name: Add dynamic docker bridges to interfaces
+  lineinfile:
+    path: /etc/shorewall/interfaces
+    line: "dock    veth+           routeback=1"
+
+- name: Restart docker
+  systemd:
+    name: docker
+    state: restarted
+
+- name: Restart shorewall
+  systemd:
+    name: shorewall
+    state: restarted

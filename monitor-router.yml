@@ -1,9 +1,12 @@
 ---
 - hosts: router
   roles:
-    - docker
+    - docker_install
+    - docker_network
+    - ping_exporter_tracker
     - ping_exporter_isps
     - ping_exporter_devices
     - speedtest_exporter
+    - speedtest_exporter_isps
     - prometheus
     - grafana
