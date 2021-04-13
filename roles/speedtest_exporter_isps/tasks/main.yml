@@ -17,7 +17,7 @@
     network_mode: macvlan-net
     networks:
       - name: macvlan-net
-        ipv4_address: "{{ item.value }}.201"
+        ipv4_address: "{{ item.value }}.5"
         links:
           - "speedtest-exporter-{{ item.key }}"
 

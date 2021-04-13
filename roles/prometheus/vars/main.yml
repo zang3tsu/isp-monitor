@@ -23,11 +23,9 @@ prometheus_scrape_configs:
       - targets:
           - "localhost:9427"
           - "localhost:9428"
-          - "192.168.10.200:9427"
-          - "192.168.11.200:9427"
-          - "192.168.12.200:9427"
-          - "chobi-mnl.duckdns.org:9427"
-          - "chobi-mnl2.duckdns.org:9427"
+          - "192.168.10.4:9427"
+          - "192.168.11.4:9427"
+          - "192.168.12.4:9427"
     relabel_configs:
       - source_labels: [__address__]
         regex: (localhost:9427)
@@ -49,14 +47,6 @@ prometheus_scrape_configs:
         regex: (192.168.12.*)
         target_label: env
         replacement: smart
-      - source_labels: [__address__]
-        regex: (chobi-mnl.*)
-        target_label: env
-        replacement: chobi-mnl
-      - source_labels: [__address__]
-        regex: (chobi-mnl2.*)
-        target_label: env
-        replacement: chobi-mnl2
 
   - job_name: "speedtest_exporter"
     metrics_path: /probe
@@ -65,11 +55,9 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
           - "localhost:9469"
-          - "192.168.10.201:9469"
-          - "192.168.11.201:9469"
-          - "192.168.12.201:9469"
-          - "chobi-mnl.duckdns.org:9469"
-          - "chobi-mnl2.duckdns.org:9469"
+          - "192.168.10.5:9469"
+          - "192.168.11.5:9469"
+          - "192.168.12.5:9469"
     scrape_interval: 60m
     scrape_timeout: 90s
     relabel_configs:
@@ -89,25 +77,15 @@ prometheus_scrape_configs:
         regex: (192.168.12.*)
         target_label: env
         replacement: smart
-      - source_labels: [__address__]
-        regex: (chobi-mnl.*)
-        target_label: env
-        replacement: chobi-mnl
-      - source_labels: [__address__]
-        regex: (chobi-mnl2.*)
-        target_label: env
-        replacement: chobi-mnl2
 
   - job_name: "script_exporter"
     metrics_path: /metrics
     static_configs:
       - targets:
           - "localhost:9469"
-          - "192.168.10.201:9469"
-          - "192.168.11.201:9469"
-          - "192.168.12.201:9469"
-          - "chobi-mnl.duckdns.org:9469"
-          - "chobi-mnl2.duckdns.org:9469"
+          - "192.168.10.5:9469"
+          - "192.168.11.5:9469"
+          - "192.168.12.5:9469"
     relabel_configs:
       - source_labels: [__address__]
         regex: (localhost.*)
@@ -125,11 +103,3 @@ prometheus_scrape_configs:
         regex: (192.168.12.*)
         target_label: env
         replacement: smart
-      - source_labels: [__address__]
-        regex: (chobi-mnl.*)
-        target_label: env
-        replacement: chobi-mnl
-      - source_labels: [__address__]
-        regex: (chobi-mnl2.*)
-        target_label: env
-        replacement: chobi-mnl2
