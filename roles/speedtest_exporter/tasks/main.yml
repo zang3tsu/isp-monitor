@@ -5,6 +5,9 @@
     name: speedtest-exporter
     image: billimek/prometheus-speedtest-exporter:1.1.0
     container_default_behavior: compatibility
+    comparisons:
+      "*": strict
+    recreate: yes
     restart_policy: unless-stopped
     restart: yes
     published_ports:

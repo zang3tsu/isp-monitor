@@ -10,6 +10,9 @@
     name: ping-exporter-tracker
     image: czerwonk/ping_exporter
     container_default_behavior: compatibility
+    comparisons:
+      "*": strict
+    recreate: yes
     restart_policy: unless-stopped
     restart: yes
     volumes:

@@ -1,5 +1,12 @@
 ---
 # Source: https://github.com/czerwonk/ping_exporter
+- name: Create config dir
+  ansible.builtin.file:
+    path: "{{ ping_exporter_isps_config_path }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ isps | dict2items }}"
+
 - name: Template isp config
   template:
     src: config.yml.j2
@@ -11,6 +18,9 @@
     name: "ping-exporter-isps-{{ item.key }}"
     image: czerwonk/ping_exporter
     container_default_behavior: compatibility
+    comparisons:
+      "*": strict
+    recreate: yes
     restart_policy: unless-stopped
     restart: yes
     networks_cli_compatible: yes

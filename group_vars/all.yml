@@ -4,6 +4,7 @@ isps:
   pldt: 192.168.10
   globe: 192.168.11
   smart: 192.168.12
+  converge: 192.168.13
 
 prometheus_grafana_web_listen_address: "192.168.250.2:9091"
 
@@ -18,3 +19,6 @@ docker_ipam_config:
   - iprange: 192.168.12.4/28
     subnet: 192.168.12.0/24
     gateway: 192.168.12.1
+  - iprange: 192.168.13.4/28
+    subnet: 192.168.13.0/24
+    gateway: 192.168.13.1
