@@ -38,9 +38,9 @@
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
     </envs>
-    <option name="SDK_HOME" value="$USER_HOME$/.pyenv/versions/isp-monitor-venv/bin/python" />
+    <option name="SDK_HOME" value="" />
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-    <option name="IS_MODULE_SDK" value="false" />
+    <option name="IS_MODULE_SDK" value="true" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -54,7 +54,7 @@
         <ENTRY IS_ENABLED="true" PARSER="runconfig" />
       </ENTRIES>
     </EXTENSION>
-    <option name="SCRIPT_NAME" value="$USER_HOME$/.pyenv/versions/isp-monitor-venv/bin/ansible-playbook" />
+    <option name="SCRIPT_NAME" value="$USER_HOME$/.cache/pypoetry/virtualenvs/isp-monitor-jTqp7tG--py3.9/bin/ansible-playbook" />
     <option name="PARAMETERS" value="-i hosts.yml monitor-router.yml" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />

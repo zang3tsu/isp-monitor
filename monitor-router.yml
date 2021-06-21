@@ -1,5 +1,5 @@
 ---
-- hosts: router
+- hosts: all
   roles:
     - docker_install
     - docker_network

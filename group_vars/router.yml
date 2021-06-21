@@ -1,0 +1,2 @@
+docker_parent_interface: vmbr0
+prometheus_grafana_web_listen_address: "192.168.250.2:9091"

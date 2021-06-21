@@ -42,6 +42,7 @@
     - docker-ce
     - docker-ce-cli
     - containerd.io
+    - python3-pip
 
 - name: Install Docker Module for Python
   pip:

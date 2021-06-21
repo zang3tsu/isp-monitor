@@ -23,7 +23,6 @@ prometheus_scrape_configs:
       - targets:
           - "localhost:9427"
           - "localhost:9428"
-          - "192.168.10.4:9427"
           - "192.168.11.4:9427"
           - "192.168.12.4:9427"
           - "192.168.13.4:9427"
@@ -36,10 +35,6 @@ prometheus_scrape_configs:
         regex: (localhost:9428)
         target_label: env
         replacement: devices
-      - source_labels: [__address__]
-        regex: (192.168.10.*)
-        target_label: env
-        replacement: pldt
       - source_labels: [__address__]
         regex: (192.168.11.*)
         target_label: env
@@ -60,7 +55,6 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
           - "localhost:9469"
-          - "192.168.10.5:9469"
           - "192.168.11.5:9469"
           - "192.168.12.5:9469"
           - "192.168.13.5:9469"
@@ -71,10 +65,6 @@ prometheus_scrape_configs:
         regex: (localhost.*)
         target_label: env
         replacement: _router
-      - source_labels: [__address__]
-        regex: (192.168.10.*)
-        target_label: env
-        replacement: pldt
       - source_labels: [__address__]
         regex: (192.168.11.*)
         target_label: env
@@ -93,7 +83,6 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
           - "localhost:9469"
-          - "192.168.10.5:9469"
           - "192.168.11.5:9469"
           - "192.168.12.5:9469"
           - "192.168.13.5:9469"
@@ -102,10 +91,6 @@ prometheus_scrape_configs:
         regex: (localhost.*)
         target_label: env
         replacement: _router
-      - source_labels: [__address__]
-        regex: (192.168.10.*)
-        target_label: env
-        replacement: pldt
       - source_labels: [__address__]
         regex: (192.168.11.*)
         target_label: env
