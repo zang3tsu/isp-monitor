@@ -28,7 +28,7 @@
     network_mode: macvlan-net
     networks:
       - name: macvlan-net
-        ipv4_address: "{{ item.value }}.4"
+        ipv4_address: "{{ item.value }}.22"
         links:
           - "ping-exporter-{{ item.key }}"
     volumes:

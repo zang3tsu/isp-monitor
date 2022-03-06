@@ -10,6 +10,7 @@ grafana_datasources:
     access: proxy
     url: "http://{{ prometheus_grafana_web_listen_address }}"
     basicAuth: false
+    isDefault: true
 grafana_auth:
   anonymous:
     enabled: true

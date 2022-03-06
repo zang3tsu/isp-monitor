@@ -11,7 +11,7 @@ prometheus_scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets:
-          - "192.168.250.2:9091"
+          - "192.168.250.6:9091"
     relabel_configs:
       - source_labels: [__address__]
         target_label: env
@@ -21,18 +21,19 @@ prometheus_scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets:
-          - "localhost:9427"
-          - "localhost:9428"
-          - "192.168.11.4:9427"
-          - "192.168.12.4:9427"
-          - "192.168.13.4:9427"
+          - "127.0.0.1:9427"
+          - "127.0.0.1:9428"
+          - "192.168.11.22:9427"
+          - "192.168.12.22:9427" # wan-smart
+          #          - "192.168.250.22:9427" # wwan-smart
+          - "192.168.13.22:9427"
     relabel_configs:
       - source_labels: [__address__]
-        regex: (localhost:9427)
+        regex: (127.0.0.1:9427)
         target_label: env
         replacement: _router
       - source_labels: [__address__]
-        regex: (localhost:9428)
+        regex: (127.0.0.1:9428)
         target_label: env
         replacement: devices
       - source_labels: [__address__]
@@ -43,6 +44,10 @@ prometheus_scrape_configs:
         regex: (192.168.12.*)
         target_label: env
         replacement: smart
+      #      - source_labels: [__address__]
+      #        regex: (192.168.250.22)
+      #        target_label: env
+      #        replacement: smart
       - source_labels: [__address__]
         regex: (192.168.13.*)
         target_label: env
@@ -54,15 +59,16 @@ prometheus_scrape_configs:
       script: [speedtest]
     static_configs:
       - targets:
-          - "localhost:9469"
-          - "192.168.11.5:9469"
-          - "192.168.12.5:9469"
-          - "192.168.13.5:9469"
+          - "192.168.250.6:9469"
+          - "192.168.11.23:9469"
+          - "192.168.12.23:9469" # wan-smart
+          #          - "192.168.250.23:9469" # wwan-smart
+          - "192.168.13.23:9469"
     scrape_interval: 60m
     scrape_timeout: 90s
     relabel_configs:
       - source_labels: [__address__]
-        regex: (localhost.*)
+        regex: (192.168.250.6)
         target_label: env
         replacement: _router
       - source_labels: [__address__]
@@ -73,6 +79,10 @@ prometheus_scrape_configs:
         regex: (192.168.12.*)
         target_label: env
         replacement: smart
+      #      - source_labels: [__address__]
+      #        regex: (192.168.250.23)
+      #        target_label: env
+      #        replacement: smart
       - source_labels: [__address__]
         regex: (192.168.13.*)
         target_label: env
@@ -82,13 +92,14 @@ prometheus_scrape_configs:
     metrics_path: /metrics
     static_configs:
       - targets:
-          - "localhost:9469"
-          - "192.168.11.5:9469"
-          - "192.168.12.5:9469"
-          - "192.168.13.5:9469"
+          - "127.0.0.1:9469"
+          - "192.168.11.23:9469"
+          - "192.168.12.23:9469" # wan-smart
+          #          - "192.168.250.23:9469" # wwan-smart
+          - "192.168.13.23:9469"
     relabel_configs:
       - source_labels: [__address__]
-        regex: (localhost.*)
+        regex: (127.0.0.1)
         target_label: env
         replacement: _router
       - source_labels: [__address__]
@@ -99,6 +110,10 @@ prometheus_scrape_configs:
         regex: (192.168.12.*)
         target_label: env
         replacement: smart
+      #      - source_labels: [__address__]
+      #        regex: (192.168.250.23)
+      #        target_label: env
+      #        replacement: smart
       - source_labels: [__address__]
         regex: (192.168.13.*)
         target_label: env

@@ -1,0 +1,28 @@
+---
+- hosts: all
+  tasks:
+    - name: Install updates
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: safe
+
+    - name: Install dependencies
+      ansible.builtin.apt:
+        pkg:
+          - ca-certificates
+          - apt-transport-https
+
+    - name: Add unifi apt key
+      ansible.builtin.apt_key:
+        keyserver: keyserver.ubuntu.com
+        id: 06E85760C0A52C50
+
+    - name: Add unifi apt source
+      ansible.builtin.apt_repository:
+        repo: deb https://www.ui.com/downloads/unifi/debian stable ubiquiti
+
+    - name: Install unifi controller
+      ansible.builtin.apt:
+        update_cache: yes
+        pkg:
+          - unifi

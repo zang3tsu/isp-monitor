@@ -1,9 +1,15 @@
 ---
 # source: https://github.com/billimek/prometheus-speedtest-exporter
+
+- name: Log into DockerHub
+  community.general.docker_login:
+    username: zang3tsu
+    password: A89*TvXxQQssAdmV!&HJ
+
 - name: Create isp container/s
   community.general.docker_container:
     name: "speedtest-exporter-{{ item.key }}"
-    image: billimek/prometheus-speedtest-exporter:1.1.0
+    image: zang3tsu/prometheus-speedtest-exporter
     container_default_behavior: compatibility
     comparisons:
       "*": strict
@@ -20,7 +26,7 @@
     network_mode: macvlan-net
     networks:
       - name: macvlan-net
-        ipv4_address: "{{ item.value }}.5"
+        ipv4_address: "{{ item.value }}.23"
         links:
           - "speedtest-exporter-{{ item.key }}"
 

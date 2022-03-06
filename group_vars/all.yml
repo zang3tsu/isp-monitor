@@ -3,22 +3,26 @@ base_path: "/opt/monitor"
 isps:
   #  pldt: 192.168.10
   globe: 192.168.11
-  smart: 192.168.12
+  smart: 192.168.12 # wan-smart
+  #  smart: 192.168.250 # wwan-smart
   converge: 192.168.13
 
 prometheus_grafana_web_listen_address: "192.168.250.6:9091"
 
 docker_parent_interface: eth1
 docker_ipam_config:
-  #  - iprange: 192.168.10.4/28
-  #    subnet: 192.168.10.0/24
-  #    gateway: 192.168.10.1
-  - iprange: 192.168.11.4/28
-    subnet: 192.168.11.0/24
+  #    - subnet: 192.168.250.0/24
+  #      gateway: 192.168.250.1
+  - subnet: 192.168.11.0/24
     gateway: 192.168.11.1
-  - iprange: 192.168.12.4/28
-    subnet: 192.168.12.0/24
+  #    iprange: 192.168.11.21/28
+  - subnet: 192.168.12.0/24
     gateway: 192.168.12.1
-  - iprange: 192.168.13.4/28
-    subnet: 192.168.13.0/24
+  #    iprange: 192.168.12.21/28
+  - subnet: 192.168.13.0/24
     gateway: 192.168.13.1
+#    iprange: 192.168.13.21/28
+
+#  - iprange: 192.168.10.4/28
+#    subnet: 192.168.10.0/24
+#    gateway: 192.168.10.1
